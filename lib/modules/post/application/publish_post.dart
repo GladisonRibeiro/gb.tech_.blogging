@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:gbtech_blogging/modules/post/domain/exception/exception.dart';
-import 'package:gbtech_blogging/modules/post/domain/repositories/post_repository.dart';
 
 import '../../auth/domain/entities/user.dart';
 import '../domain/entities/post.dart';
+import '../domain/exception/exception.dart';
+import '../domain/repositories/post_repository.dart';
 
 class PublishPost {
   final PostRepository repository;
