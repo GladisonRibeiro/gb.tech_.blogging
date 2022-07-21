@@ -14,7 +14,9 @@ void main() {
 
   test('Deve retornar um Post', () async {
     when(() => repositoryMock.getPost(any())).thenAnswer(
-      (invocation) async => Right(Post(userName: 'teste', message: 'message')),
+      (invocation) async => Right(
+        Post(userName: 'teste', message: 'message', idUser: 0),
+      ),
     );
     var result = await getPost(1);
     expect(result.fold(id, id), isA<Post>());

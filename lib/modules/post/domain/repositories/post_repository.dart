@@ -8,4 +8,5 @@ abstract class PostRepository {
   Future<Either<PostException, List<Post>>> getPosts();
   Future<Either<PostException, Post>> publishPost(Post post);
   Future<Either<PostException, Post>> getPost(int idPost);
+  Future<Either<PostException, Post>> updatePost(Post post);
 }

@@ -16,7 +16,11 @@ class PublishPost {
   }) async {
     final Post post;
     try {
-      post = Post(userName: currentUser.name, message: message);
+      post = Post(
+        userName: currentUser.name,
+        message: message,
+        idUser: currentUser.idUser,
+      );
     } on PostException catch (e) {
       return Left(e);
     }

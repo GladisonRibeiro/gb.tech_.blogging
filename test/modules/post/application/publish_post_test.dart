@@ -14,18 +14,19 @@ void main() {
   final publishPost = PublishPost(repository: repositoryMock);
 
   setUpAll(() {
-    registerFallbackValue(Post(message: 'message', userName: 'teste'));
+    registerFallbackValue(
+      Post(message: 'message', userName: 'teste', idUser: 0),
+    );
   });
 
   test('Deve publicar um Post', () async {
     when(() => repositoryMock.publishPost(any())).thenAnswer(
-        (invocation) async =>
-            Right(Post(message: 'message', userName: 'teste')));
-    var result = await publishPost(
-      currentUser: User(
-        name: '',
-        urlPicture: '',
+      (invocation) async => Right(
+        Post(message: 'message', userName: 'teste', idUser: 0),
       ),
+    );
+    var result = await publishPost(
+      currentUser: User(name: '', urlPicture: '', idUser: 0),
       message: 'message',
     );
     expect(result.fold(id, id), isA<Post>());
@@ -35,17 +36,21 @@ void main() {
       'Deve retornar um InvalidMessageException ao publicar um Post com uma mensagem inválida',
       () async {
     expect(
-      () => Post(userName: 'teste', message: ''),
+      () => Post(
+        userName: 'teste',
+        message: '',
+        idUser: 0,
+      ),
       throwsA(isA<InvalidMessageException>()),
     );
 
-    when(() => repositoryMock.publishPost(any()))
-        .thenAnswer((invocation) async => Left(InvalidMessageException()));
-    var result = await publishPost(
-      currentUser: User(
-        name: '',
-        urlPicture: '',
+    when(() => repositoryMock.publishPost(any())).thenAnswer(
+      (invocation) async => Left(
+        InvalidMessageException(),
       ),
+    );
+    var result = await publishPost(
+      currentUser: User(name: '', urlPicture: '', idUser: 0),
       message: '',
     );
     expect(result.fold(id, id), isA<InvalidMessageException>());

@@ -23,7 +23,9 @@ void main() {
   test('Deve realizar o login', () async {
     when(() => repositoryMock.login(credential: any(named: 'credential')))
         .thenAnswer(
-      (invocation) async => Right(User(name: 'name', urlPicture: 'urlPicture')),
+      (invocation) async => Right(
+        User(name: 'name', urlPicture: 'urlPicture', idUser: 0),
+      ),
     );
     var result = await login(validEmail, '123');
     expect(result.fold(id, id), isA<User>());

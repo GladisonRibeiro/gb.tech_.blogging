@@ -22,7 +22,9 @@ void main() {
   test('Deve realizar o cadastro', () async {
     when(() => repositoryMock.signUp(credential: any(named: 'credential')))
         .thenAnswer(
-      (invocation) async => Right(User(name: 'name', urlPicture: 'urlPicture')),
+      (invocation) async => Right(
+        User(name: 'name', urlPicture: 'urlPicture', idUser: 0),
+      ),
     );
     var result = await signUp('teste@gbtechblogging.io', '123', 'teste');
     expect(result.fold(id, id), isA<User>());
