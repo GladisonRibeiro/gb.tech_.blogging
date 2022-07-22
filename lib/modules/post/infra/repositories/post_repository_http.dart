@@ -27,8 +27,7 @@ class PostRepositoryHttp implements PostRepository {
 
   Map<String, dynamic> postToMap(Post post) {
     return <String, dynamic>{
-      "id": post.idPost,
-      'update_date': post.updateDate?.toIso8601String(),
+      "update_date": post.updateDate?.toIso8601String(),
       "user": {
         "id": post.idUser,
         "name": post.userName,
@@ -107,10 +106,10 @@ class PostRepositoryHttp implements PostRepository {
   @override
   Future<Either<PostException, Post>> publishPost(Post post) async {
     try {
-      final response = await dio.post(postUrl);
+      final postMap = postToMap(post);
+      final response = await dio.post(postUrl, data: postMap);
       if (response.statusCode == 201) {
         final idPost = response.data["id"] as int;
-        final postMap = postToMap(post);
         postMap["id"] = idPost;
         return Right(postFromMap(postMap));
       } else {
