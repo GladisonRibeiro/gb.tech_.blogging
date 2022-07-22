@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6
+  gbtech_blogging_ds:
+    path: ./packages/gbtech_blogging_ds
 
 dev_dependencies:
   flutter_test:
