@@ -33,7 +33,7 @@ Foi criado um package __gbtech_blogging_ds__ permitindo assim que seja reutiliza
 |:--|:--|
 |tokens| colors, spacings, typography|
 |components| button, textField|
-|patterns| post_card|
+|patterns| card, input |
 
 
 ## Telas e navegação
