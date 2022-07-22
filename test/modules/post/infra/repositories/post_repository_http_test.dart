@@ -63,7 +63,6 @@ void main() {
       ),
     );
     expect(map, isA<Map<String, dynamic>>());
-    expect(map["id"], equals(1));
     expect(
       map["message"]["content"],
       equals(
@@ -256,7 +255,12 @@ void main() {
 
   group("publishPost", () {
     test("Deve publicar um Post", () async {
-      when(() => dio.post(postRepository.postUrl)).thenAnswer(
+      when(
+        () => dio.post(
+          postRepository.postUrl,
+          data: any(named: 'data'),
+        ),
+      ).thenAnswer(
         (_) async => Response(
           data: postMap,
           statusCode: 201,
@@ -273,7 +277,12 @@ void main() {
     test(
         "Deve retornar um HttpException quando o statusCode for diferente de 200",
         () async {
-      when(() => dio.post(postRepository.postUrl)).thenAnswer(
+      when(
+        () => dio.post(
+          postRepository.postUrl,
+          data: any(named: 'data'),
+        ),
+      ).thenAnswer(
         (_) async => Response(
           data: postMap,
           statusCode: 500,
@@ -290,7 +299,12 @@ void main() {
     test(
         "Deve retornar um NotFoundException quando ocorrer uma exception não tratada",
         () async {
-      when(() => dio.post(postRepository.postUrl)).thenThrow(Exception());
+      when(
+        () => dio.post(
+          postRepository.postUrl,
+          data: any(named: 'data'),
+        ),
+      ).thenThrow(Exception());
       var result =
           await postRepository.publishPost(postRepository.postFromMap(postMap));
       expect(result.fold(id, id), isA<NotFoundException>());
