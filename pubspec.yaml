@@ -39,6 +39,8 @@ dependencies:
   gbtech_blogging_ds:
     path: ./packages/gbtech_blogging_ds
   flutter_modular: ^5.0.3
+  bloc: ^8.0.3
+  bloc_test: ^9.0.3
 
 dev_dependencies:
   flutter_test:

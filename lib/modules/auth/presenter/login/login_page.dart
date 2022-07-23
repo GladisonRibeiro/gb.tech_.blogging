@@ -1,13 +1,52 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
 import '../../shared/widgets/widgets.dart';
+import 'login_bloc.dart';
+import 'login_event.dart';
+import 'login_state.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final bloc = Modular.get<LoginBloc>();
+  late StreamSubscription subscription;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  LoginPage({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    subscription = bloc.stream.listen((event) {
+      print(event);
+
+      if (event is LoginSuccess) {
+        Modular.to.navigate('/post/');
+      }
+      if (event is LoginError) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: accentColor,
+          content: Text("Verifique suas credenciais!"),
+        ));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    bloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +88,7 @@ class LoginPage extends StatelessWidget {
                         child: Column(
                           children: [
                             GbInput(
+                              controller: emailController,
                               label: 'E-mail',
                               validator: (email) {
                                 if (email?.isEmpty ?? false) {
@@ -59,6 +99,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             SpacerMedium(),
                             GbInput(
+                              controller: passwordController,
                               label: 'Senha',
                               validator: (senha) {
                                 if (senha?.isEmpty ?? false) {
@@ -68,12 +109,27 @@ class LoginPage extends StatelessWidget {
                               },
                             ),
                             SpacerExtraLarge(),
-                            GbButton(
-                              label: 'Entrar',
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // Is Valid
+                            StreamBuilder(
+                              stream: bloc.stream,
+                              builder: (context, snapshot) {
+                                final state = bloc.state;
+
+                                if (state is LoginLoading) {
+                                  return const CircularProgressIndicator();
                                 }
+
+                                return GbButton(
+                                  label: 'Entrar',
+                                  onTap: () {
+                                    _formKey.currentState?.save();
+                                    if (_formKey.currentState!.validate()) {
+                                      final email = emailController.text;
+                                      final password = passwordController.text;
+                                      bloc.add(
+                                          LoginSubmitPressed(email, password));
+                                    }
+                                  },
+                                );
                               },
                             ),
                             SpacerLarge(),
