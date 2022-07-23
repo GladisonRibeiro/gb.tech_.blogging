@@ -7,6 +7,8 @@ import '../src/tokens/tokens.dart';
 class Example extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
+  Example({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
