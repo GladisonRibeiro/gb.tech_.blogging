@@ -49,9 +49,9 @@ Foi criado um package __gbtech_blogging_ds__ permitindo assim que seja reutiliza
 ```
 |Nome da Tela| Conteúdo|
 |:--|:--|
-|Splash| Nome do aplicativo e informações do desenvolvedor |
+|Splash| Icone, nome do aplicativo e informações do desenvolvedor |
 |Login| Inputs de e-mail e senha, botão entrar e botão cadastre-se |
-|SignUp| Inputs de nome, e-mail, senha e confirmação de senha, botão continuar|
+|SignUp| Inputs de nome, e-mail, senha, botão continuar|
 |Home| Navegação para telas de postagens e novidades|
 |Posts| Lista de postagens e input para novo post |
 |News|Lista das últimas novidades do Boticário|
