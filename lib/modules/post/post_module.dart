@@ -10,7 +10,9 @@ import 'application/publish_post.dart';
 import 'application/update_post.dart';
 import 'infra/repositories/post_repository_http.dart';
 import 'presenter/home/home_page.dart';
+import 'presenter/news/news_bloc.dart';
 import 'presenter/news/news_page.dart';
+import 'presenter/posts/posts_bloc.dart';
 import 'presenter/posts/posts_page.dart';
 
 class PostModule extends Module {
@@ -24,6 +26,8 @@ class PostModule extends Module {
         Bind((i) => GetPosts(repository: i())),
         Bind((i) => PublishPost(repository: i())),
         Bind((i) => UpdatePost(repository: i())),
+        Bind((i) => NewsBloc(i())),
+        Bind((i) => PostsBloc(i(), i(), i(), i(), i(), i())),
       ];
 
   @override
