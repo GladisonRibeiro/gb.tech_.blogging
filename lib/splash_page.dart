@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'modules/auth/shared/widgets/background_hero_widget.dart';
 
@@ -12,6 +13,9 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final urlGitHubRepository =
+      Uri.parse('https://github.com/GladisonRibeiro/gb.tech_.blogging');
+
   @override
   void initState() {
     super.initState();
@@ -19,8 +23,12 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   openAuthModule() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 5));
     Modular.to.navigate('/auth/');
+  }
+
+  openGithubLink() async {
+    await launchUrl(urlGitHubRepository);
   }
 
   @override
@@ -41,7 +49,30 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
           ),
-          Container(),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GbHeadline(
+                  'gb.tech_ blogging',
+                  style: const TextStyle(color: backgroundColor),
+                ),
+                SpacerExtraLarge(),
+                GbText(
+                  'por Gladison Ribeiro da Silva',
+                  style: const TextStyle(color: backgroundColor),
+                ),
+                GbTextButton(
+                  label: 'Veja no GitHub',
+                  onTap: openGithubLink,
+                ),
+                SpacerExtraLarge(),
+              ],
+            ),
+          ),
         ],
       ),
     );
