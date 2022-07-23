@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'modules/auth/auth_module.dart';
+import 'modules/post/post_module.dart';
 import 'splash_page.dart';
 
 class AppModule extends Module {
@@ -16,5 +17,6 @@ class AppModule extends Module {
           duration: const Duration(milliseconds: 500),
         ),
         ModuleRoute('/auth', module: AuthModule()),
+        ModuleRoute('/post', module: PostModule()),
       ];
 }
