@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.initState();
     bloc.stream.listen((event) {
       if (event is SignUpSuccess) {
-        Modular.to.navigate('/post/');
+        Modular.to.navigate('/post/posts');
       }
 
       if (event is SignUpError) {

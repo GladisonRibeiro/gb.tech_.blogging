@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     bloc.stream.listen((event) {
       if (event is LoginSuccess) {
-        Modular.to.navigate('/post/');
+        Modular.to.navigate('/post/posts');
       }
       if (event is LoginError) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
