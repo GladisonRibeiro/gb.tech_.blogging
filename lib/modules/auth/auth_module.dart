@@ -7,6 +7,7 @@ import 'infra/repositories/login_repository_http.dart';
 import 'infra/repositories/sign_up_repository_http.dart';
 import 'presenter/login/login_bloc.dart';
 import 'presenter/login/login_page.dart';
+import 'presenter/sign_up/sign_up_bloc.dart';
 import 'presenter/sign_up/sign_up_page.dart';
 
 class AuthModule extends Module {
@@ -18,11 +19,12 @@ class AuthModule extends Module {
         Bind((i) => SignUpRepositoryHttp(i())),
         Bind((i) => SignUp(repository: i())),
         Bind((i) => LoginBloc(i())),
+        Bind((i) => SignUpBloc(i())),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const LoginPage()),
-        ChildRoute('/sign_up', child: (context, args) => SignUpPage()),
+        ChildRoute('/sign_up', child: (context, args) => const SignUpPage()),
       ];
 }

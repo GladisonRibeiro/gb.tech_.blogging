@@ -1,12 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../domain/exception/exception.dart';
 import '../../shared/widgets/widgets.dart';
+import 'sign_up_bloc.dart';
+import 'sign_up_event.dart';
+import 'sign_up_state.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
+  final bloc = Modular.get<SignUpBloc>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
-  SignUpPage({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    bloc.stream.listen((event) {
+      if (event is SignUpSuccess) {
+        Modular.to.navigate('/post/');
+      }
+
+      if (event is SignUpError) {
+        String message = "Não foi possível realizar essa ação no momento!";
+
+        if (event.exception is InvalidNameException) {
+          message = "Verifique o nome digitado!";
+        }
+        if (event.exception is InvalidEmailException) {
+          message = "Verifique o email digitado!";
+        }
+        if (event.exception is InvalidPasswordException) {
+          message = "Verifique a senha digitada!";
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: accentColor,
+          content: Text(message),
+        ));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +87,7 @@ class SignUpPage extends StatelessWidget {
           ),
           SafeAreaContainerWidget(
             children: [
-              PaddingMedium(
+              PaddingExtraLarge(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,6 +102,7 @@ class SignUpPage extends StatelessWidget {
                         child: Column(
                           children: [
                             GbInput(
+                              controller: nameController,
                               label: 'Nome',
                               validator: (email) {
                                 if (email?.isEmpty ?? false) {
@@ -63,6 +113,7 @@ class SignUpPage extends StatelessWidget {
                             ),
                             SpacerMedium(),
                             GbInput(
+                              controller: emailController,
                               label: 'E-mail',
                               validator: (email) {
                                 if (email?.isEmpty ?? false) {
@@ -73,6 +124,7 @@ class SignUpPage extends StatelessWidget {
                             ),
                             SpacerMedium(),
                             GbInput(
+                              controller: passwordController,
                               label: 'Senha',
                               validator: (senha) {
                                 if (senha?.isEmpty ?? false) {
@@ -82,12 +134,36 @@ class SignUpPage extends StatelessWidget {
                               },
                             ),
                             SpacerExtraLarge(),
-                            GbButton(
-                              label: 'Continuar',
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // Is Valid
+                            StreamBuilder(
+                              stream: bloc.stream,
+                              builder: (context, snapshot) {
+                                final state = bloc.state;
+
+                                if (state is SignUpLoading) {
+                                  return const CircularProgressIndicator();
                                 }
+
+                                return GbButton(
+                                  label: 'Continuar',
+                                  onTap: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState?.save();
+                                      if (_formKey.currentState!.validate()) {
+                                        final email = emailController.text;
+                                        final password =
+                                            passwordController.text;
+                                        final name = nameController.text;
+                                        bloc.add(
+                                          SignUpSubmitPressed(
+                                            name,
+                                            email,
+                                            password,
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
+                                );
                               },
                             ),
                           ],
