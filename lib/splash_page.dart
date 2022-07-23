@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
 
   openAuthModule() async {
     await Future.delayed(const Duration(seconds: 2));
-    Modular.to.navigate('/auth');
+    Modular.to.navigate('/auth/');
   }
 
   @override
@@ -41,14 +41,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.chat,
-              size: 48,
-              color: Colors.white,
-            ),
-          ),
+          Container(),
         ],
       ),
     );
