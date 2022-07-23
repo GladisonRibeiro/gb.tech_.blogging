@@ -1,6 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../shared/shared_module.dart';
 import 'application/login.dart';
 import 'application/sign_up.dart';
 import 'infra/repositories/login_repository_http.dart';
@@ -12,8 +12,10 @@ import 'presenter/sign_up/sign_up_page.dart';
 
 class AuthModule extends Module {
   @override
+  List<Module> get imports => [SharedModule()];
+
+  @override
   List<Bind<Object>> get binds => [
-        Bind.factory<Dio>((i) => Dio()),
         Bind((i) => LoginRepositoryHttp(i())),
         Bind((i) => Login(repository: i())),
         Bind((i) => SignUpRepositoryHttp(i())),
