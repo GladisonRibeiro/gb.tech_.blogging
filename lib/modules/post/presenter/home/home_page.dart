@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,17 +31,18 @@ class _HomePageState extends State<HomePage> {
           valueListenable: currentPage,
           builder: (context, value, _) {
             return BottomNavigationBar(
+              selectedItemColor: primaryColor,
               currentIndex: value,
               onTap: onChangePage,
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.chat),
-                  activeIcon: Icon(Icons.chat_outlined),
+                  activeIcon: Icon(Icons.chat),
+                  icon: Icon(Icons.chat_outlined),
                   label: 'Postagens',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.newspaper),
-                  activeIcon: Icon(Icons.newspaper_outlined),
+                  activeIcon: Icon(Icons.newspaper),
+                  icon: Icon(Icons.newspaper_outlined),
                   label: 'Novidades',
                 ),
               ],
