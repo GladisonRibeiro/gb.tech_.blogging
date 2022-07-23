@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
@@ -19,16 +17,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final bloc = Modular.get<LoginBloc>();
-  late StreamSubscription subscription;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    subscription = bloc.stream.listen((event) {
-      print(event);
-
+    bloc.stream.listen((event) {
       if (event is LoginSuccess) {
         Modular.to.navigate('/post/');
       }
@@ -43,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    subscription.cancel();
     bloc.close();
     super.dispose();
   }
