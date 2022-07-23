@@ -8,6 +8,8 @@ class GbInput extends StatelessWidget {
   final String label;
   final String? Function(String?)? validator;
   final String? value;
+  final void Function(String?)? onSaved;
+  final TextEditingController? controller;
 
   const GbInput({
     Key? key,
@@ -15,6 +17,8 @@ class GbInput extends StatelessWidget {
     this.validator,
     this.value,
     this.keyInput,
+    this.onSaved,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -24,7 +28,12 @@ class GbInput extends StatelessWidget {
       children: [
         GbLabel(label),
         SpacerSmall(),
-        GbTextField(keyField: keyInput, validator: validator),
+        GbTextField(
+          keyField: keyInput,
+          validator: validator,
+          onSaved: onSaved,
+          controller: controller,
+        ),
       ],
     );
   }

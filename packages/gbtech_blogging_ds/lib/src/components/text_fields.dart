@@ -6,12 +6,23 @@ class GbTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? value;
   final Key? keyField;
+  final void Function(String?)? onSaved;
+  final TextEditingController? controller;
 
-  const GbTextField({super.key, this.validator, this.value, this.keyField});
+  const GbTextField({
+    super.key,
+    this.validator,
+    this.value,
+    this.keyField,
+    this.onSaved,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      onSaved: onSaved,
       key: keyField,
       initialValue: value,
       validator: validator,
