@@ -18,7 +18,7 @@ class AuthModule extends Module {
         Bind((i) => Login(repository: i())),
         Bind((i) => SignUpRepositoryHttp(i())),
         Bind((i) => SignUp(repository: i())),
-        Bind((i) => LoginBloc(i())),
+        Bind((i) => LoginBloc(i(), i())),
         Bind((i) => SignUpBloc(i())),
       ];
 
