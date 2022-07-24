@@ -33,6 +33,12 @@ class PostsStart extends PostsState {}
 
 class PostsLoading implements PostsState {}
 
+class PostsUpdateLoading implements PostsState {}
+
+class PostsCreateLoading implements PostsState {}
+
+class PostsDeleteLoading implements PostsState {}
+
 class PostsError implements PostsState {
   final PostException exception;
 

@@ -26,7 +26,10 @@ class PostCard extends StatelessWidget {
                     )
                   : CircleAvatar(
                       backgroundColor: primaryColor,
-                      child: Text(post.userName.characters.first),
+                      child: Text(
+                          (post.userName.isNotEmpty ? post.userName : ' ')
+                              .characters
+                              .first),
                     ),
               SpacerMedium(),
               GbLabel(post.userName),

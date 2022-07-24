@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:gbtech_blogging/modules/post/presenter/posts/posts_state.dart';
+import 'package:gbtech_blogging/modules/post/presenter/widgets/post_input.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../domain/entities/post.dart';
 import '../widgets/post_card.dart';
 import 'posts_bloc.dart';
 import 'posts_event.dart';
-import 'posts_state.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -15,49 +18,106 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  final bloc = Modular.get<PostsBloc>();
+  late PostsBloc bloc;
+  final ScrollController scrollController = ScrollController();
+  ValueNotifier<List<Post>> posts = ValueNotifier([]);
 
   @override
   void initState() {
     super.initState();
+    bloc = Modular.get<PostsBloc>();
     bloc.add(PostsLoad());
+
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 600));
+      scrollToBottom();
+    });
+
+    bloc.stream.listen((event) async {
+      if (event is PostsLoadSuccess) {
+        await Future.delayed(const Duration(microseconds: 100));
+        scrollToBottom(const Duration(microseconds: 300));
+      }
+    });
+  }
+
+  void scrollToBottom([Duration duration = const Duration(milliseconds: 10)]) {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: duration,
+      curve: Curves.easeOut,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PaddingLarge(
-        child: StreamBuilder(
-          stream: bloc.stream,
-          builder: (context, snapshot) {
-            final state = bloc.state;
+      body: SafeArea(
+        child: PaddingLarge(
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SliverAppBar(
+                title: GbHeadline('Postagens'),
+                backgroundColor: Colors.transparent,
+                automaticallyImplyLeading: false,
+              ),
+              StreamBuilder(
+                stream: bloc.stream,
+                builder: (context, snapshot) {
+                  final state = bloc.state;
 
-            if (state is PostsLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+                  if (state is PostsStart) {
+                    return SliverToBoxAdapter(
+                      child: Container(
+                        height: 300,
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
+                      ),
+                    );
+                  }
 
-            if (state is PostsError) {
-              return Center(
-                child: GbLabel(
-                  'Não foi possível carregar as novidades...',
-                ),
-              );
-            }
-
-            if (state is PostsLoadSuccess) {
-              final posts = (state).posts;
-              return ListView.builder(
-                itemCount: posts.length,
-                itemBuilder: (context, index) {
-                  final post = posts[index];
-                  return PaddingSmall(child: PostCard(post: post));
+                  if (state is PostsError) {
+                    return SliverToBoxAdapter(
+                      child: Center(
+                        child: GbLabel(
+                          'Não foi possível carregar as novidades...',
+                        ),
+                      ),
+                    );
+                  }
+                  return const SliverToBoxAdapter();
                 },
-              );
-            }
+              ),
+              StreamBuilder(
+                stream: bloc.stream,
+                builder: (context, snapshot) {
+                  final state = bloc.state;
 
-            return const SizedBox();
-          },
+                  if (state is PostsLoadSuccess) {
+                    posts.value = state.posts;
+                  }
+
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final post = posts.value[index];
+                        return PaddingSmall(child: PostCard(post: post));
+                      },
+                      childCount: posts.value.length,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
+      ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [PostInput()],
       ),
     );
   }
