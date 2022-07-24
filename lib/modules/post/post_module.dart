@@ -11,6 +11,7 @@ import 'application/publish_post.dart';
 import 'application/update_post.dart';
 import 'guards/auth_guard.dart';
 import 'infra/repositories/post_repository_http.dart';
+import 'infra/repositories/post_repository_memory.dart';
 import 'presenter/home/home_page.dart';
 import 'presenter/news/news_bloc.dart';
 import 'presenter/news/news_page.dart';
@@ -24,12 +25,13 @@ class PostModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind((i) => PostRepositoryHttp(i())),
-        Bind((i) => DeletePost(repository: i())),
-        Bind((i) => GetNews(repository: i())),
-        Bind((i) => GetPost(repository: i())),
-        Bind((i) => GetPosts(repository: i())),
-        Bind((i) => PublishPost(repository: i())),
-        Bind((i) => UpdatePost(repository: i())),
+        Bind((i) => PostRepositoryMemory()),
+        Bind((i) => GetNews(repository: i<PostRepositoryHttp>())),
+        Bind((i) => DeletePost(repository: i<PostRepositoryMemory>())),
+        Bind((i) => GetPost(repository: i<PostRepositoryMemory>())),
+        Bind((i) => GetPosts(repository: i<PostRepositoryMemory>())),
+        Bind((i) => PublishPost(repository: i<PostRepositoryMemory>())),
+        Bind((i) => UpdatePost(repository: i<PostRepositoryMemory>())),
         BlocBind.singleton((i) => NewsBloc(i())),
         BlocBind.singleton((i) => PostsBloc(i(), i(), i(), i(), i(), i())),
       ];

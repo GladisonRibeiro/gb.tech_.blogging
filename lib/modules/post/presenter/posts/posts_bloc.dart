@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:gbtech_blogging/modules/post/domain/entities/post.dart';
 
 import '../../../auth/domain/services/auth_store.dart';
 import '../../application/delete_post.dart';
@@ -17,7 +16,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final PublishPost publishPostUsecase;
   final UpdatePost updatePostUsecase;
   final AuthStore authStore;
-  List<Post>? cachePosts;
 
   PostsBloc(
     this.getPostsUsecase,
@@ -31,14 +29,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       emit(PostsLoading());
       final result = await getPostsUsecase();
 
-      if (cachePosts != null) {
-        return emit(PostsLoadSuccess(posts: cachePosts!));
-      }
-
-      emit(result.fold((l) => PostsError(l), (r) {
-        cachePosts = [...r].toList();
-        return PostsLoadSuccess(posts: r);
-      }));
+      emit(
+          result.fold((l) => PostsError(l), (r) => PostsLoadSuccess(posts: r)));
     });
     on<PostsChangePost>((event, emit) async {
       emit(PostsUpdateLoading());
@@ -50,10 +42,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       result.fold((l) {
         emit(PostsError(l));
       }, (r) {
-        if (cachePosts != null) {
-          cachePosts!.removeWhere((element) => element.idPost == event.idPost);
-          cachePosts!.add(r);
-        }
         emit(PostsUpdateSuccess(post: r));
         add(PostsLoad());
       });
@@ -68,9 +56,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       result.fold((l) {
         emit(PostsError(l));
       }, (r) {
-        if (cachePosts != null) {
-          cachePosts!.add(r);
-        }
         emit(PostsCreateSuccess(post: r));
         add(PostsLoad());
       });
@@ -84,9 +69,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       result.fold((l) {
         emit(PostsError(l));
       }, (r) {
-        if (cachePosts != null) {
-          cachePosts!.removeWhere((element) => element.idPost == event.idPost);
-        }
         emit(PostsDeleteSuccess(status: r));
         add(PostsLoad());
       });
