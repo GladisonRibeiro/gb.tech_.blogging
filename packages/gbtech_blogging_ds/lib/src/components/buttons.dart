@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:gbtech_blogging_ds/src/config/constants.dart';
 
 import '../tokens/tokens.dart';
@@ -39,6 +39,7 @@ class GbTextButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        color: Colors.transparent,
         alignment: Alignment.center,
         width: double.infinity,
         height: buttonMinHeight,
