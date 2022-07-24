@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gbtech_blogging/modules/post/presenter/posts/posts_state.dart';
-import 'package:gbtech_blogging/modules/post/presenter/widgets/post_input.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
 import '../../domain/entities/post.dart';
 import '../widgets/post_card.dart';
+import '../widgets/post_input.dart';
 import 'posts_bloc.dart';
 import 'posts_event.dart';
+import 'posts_state.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class PostsPage extends StatefulWidget {
 class _PostsPageState extends State<PostsPage> {
   late PostsBloc bloc;
   late final ScrollController scrollController;
-  ValueNotifier<List<Post>> posts = ValueNotifier([]);
+  List<Post> posts = [];
 
   @override
   void initState() {
@@ -36,8 +36,9 @@ class _PostsPageState extends State<PostsPage> {
 
     bloc.stream.listen((event) async {
       if (event is PostsLoadSuccess) {
-        await Future.delayed(const Duration(microseconds: 100));
-        scrollToBottom(const Duration(microseconds: 300));
+        Future.delayed(const Duration(microseconds: 300), () {
+          scrollToBottom(const Duration(microseconds: 300));
+        });
       }
     });
   }
@@ -106,16 +107,16 @@ class _PostsPageState extends State<PostsPage> {
                   final state = bloc.state;
 
                   if (state is PostsLoadSuccess) {
-                    posts.value = state.posts;
+                    posts = state.posts;
                   }
 
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final post = posts.value[index];
+                        final post = posts[index];
                         return PaddingSmall(child: PostCard(post: post));
                       },
-                      childCount: posts.value.length,
+                      childCount: posts.length,
                     ),
                   );
                 },
