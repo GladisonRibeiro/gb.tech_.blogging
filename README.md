@@ -63,6 +63,12 @@ Desenvolvimento em progresso...
 
 <!-- TODO: adicionar link para download do apk para teste -->
 
+## Como executar
+
+Utilizar o comando `flutter run`
+
+Obs: Para rodar __web__ localmente é necessário remover a segurança, veja como realizar essa ação [aqui](https://stackoverflow.com/questions/65630743/how-to-solve-flutter-web-api-cors-error-only-with-dart-code/66879350#66879350) 
+
 ---
 
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/gladisonribeirodasilva)](https://www.linkedin.com/in/gladisonribeirodasilva) [![Gmail Badge](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white&link=mailto:gladison.ti@gmail.com)](mailto:gladison.ti@gmail.com)
