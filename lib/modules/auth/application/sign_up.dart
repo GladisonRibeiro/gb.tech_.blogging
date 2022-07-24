@@ -17,7 +17,7 @@ class SignUp {
       if (name.trim().isEmpty) {
         throw InvalidNameException();
       }
-      credential = Credential(email: email, password: password);
+      credential = Credential(name: name, email: email, password: password);
     } on AuthException catch (e) {
       return Left(e);
     }
