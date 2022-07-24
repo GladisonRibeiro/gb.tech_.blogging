@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
-import 'package:gbtech_blogging_ds/src/config/constants.dart';
 
 class GbTextField extends StatelessWidget {
   final String? Function(String?)? validator;
