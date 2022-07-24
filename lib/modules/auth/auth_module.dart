@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import '../shared/shared_module.dart';
 import 'application/login.dart';
@@ -20,8 +21,8 @@ class AuthModule extends Module {
         Bind((i) => Login(repository: i())),
         Bind((i) => SignUpRepositoryHttp(i())),
         Bind((i) => SignUp(repository: i())),
-        Bind.factory((i) => LoginBloc(i(), i())),
-        Bind.factory((i) => SignUpBloc(i(), i())),
+        BlocBind.singleton((i) => LoginBloc(i(), i())),
+        BlocBind.singleton((i) => SignUpBloc(i(), i())),
       ];
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import '../shared/shared_module.dart';
 import 'application/delete_post.dart';
@@ -29,8 +30,8 @@ class PostModule extends Module {
         Bind((i) => GetPosts(repository: i())),
         Bind((i) => PublishPost(repository: i())),
         Bind((i) => UpdatePost(repository: i())),
-        Bind.factory((i) => NewsBloc(i())),
-        Bind.factory((i) => PostsBloc(i(), i(), i(), i(), i(), i())),
+        BlocBind.singleton((i) => NewsBloc(i())),
+        BlocBind.singleton((i) => PostsBloc(i(), i(), i(), i(), i(), i())),
       ];
 
   @override

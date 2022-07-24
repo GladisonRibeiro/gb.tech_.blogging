@@ -52,12 +52,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
