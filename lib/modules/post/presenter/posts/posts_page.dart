@@ -19,12 +19,13 @@ class PostsPage extends StatefulWidget {
 
 class _PostsPageState extends State<PostsPage> {
   late PostsBloc bloc;
-  final ScrollController scrollController = ScrollController();
+  late final ScrollController scrollController;
   ValueNotifier<List<Post>> posts = ValueNotifier([]);
 
   @override
   void initState() {
     super.initState();
+    scrollController = ScrollController();
     bloc = Modular.get<PostsBloc>();
     bloc.add(PostsLoad());
 
@@ -41,12 +42,20 @@ class _PostsPageState extends State<PostsPage> {
     });
   }
 
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   void scrollToBottom([Duration duration = const Duration(milliseconds: 10)]) {
-    scrollController.animateTo(
-      scrollController.position.maxScrollExtent,
-      duration: duration,
-      curve: Curves.easeOut,
-    );
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: duration,
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
