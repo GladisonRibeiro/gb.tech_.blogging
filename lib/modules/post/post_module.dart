@@ -29,8 +29,8 @@ class PostModule extends Module {
         Bind((i) => GetPosts(repository: i())),
         Bind((i) => PublishPost(repository: i())),
         Bind((i) => UpdatePost(repository: i())),
-        Bind((i) => NewsBloc(i())),
-        Bind((i) => PostsBloc(i(), i(), i(), i(), i(), i())),
+        Bind.factory((i) => NewsBloc(i())),
+        Bind.factory((i) => PostsBloc(i(), i(), i(), i(), i(), i())),
       ];
 
   @override
