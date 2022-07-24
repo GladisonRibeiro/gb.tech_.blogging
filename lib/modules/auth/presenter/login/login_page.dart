@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                             GbTextButton(
                               label: 'Cadastre-se',
                               onTap: () {
-                                Modular.to.pushNamed('/auth/sign_up');
+                                Modular.to.pushNamed('./sign_up');
                               },
                             ),
                           ],
