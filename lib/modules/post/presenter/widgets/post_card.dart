@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../../shared/utils/formart_date.dart';
+import '../../domain/entities/post.dart';
+
 class PostCard extends StatelessWidget {
-  final String label;
-  final String? urlPicture;
-  final String content;
-  final String footer;
+  final Post post;
 
   const PostCard({
     Key? key,
-    required this.label,
-    this.urlPicture,
-    required this.content,
-    required this.footer,
+    required this.post,
   }) : super(key: key);
 
   @override
@@ -23,25 +20,28 @@ class PostCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              urlPicture != null && urlPicture!.isNotEmpty
+              post.userUrlPicture != null && post.userUrlPicture!.isNotEmpty
                   ? CircleAvatar(
-                      foregroundImage: NetworkImage(urlPicture!),
+                      foregroundImage: NetworkImage(post.userUrlPicture!),
                     )
                   : CircleAvatar(
                       backgroundColor: primaryColor,
-                      child: Text(label.characters.first),
+                      child: Text(post.userName.characters.first),
                     ),
               SpacerMedium(),
-              GbLabel(label),
+              GbLabel(post.userName),
             ],
           ),
           SpacerMedium(),
-          GbText(content),
+          GbText(post.message),
           SpacerMedium(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              GbText(footer, style: const TextStyle(fontSize: 10)),
+              GbText(
+                formatDate(post.createdDate),
+                style: const TextStyle(fontSize: 10),
+              ),
             ],
           ),
         ],
