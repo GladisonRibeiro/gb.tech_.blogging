@@ -51,22 +51,14 @@ void main() {
     authStoreMock,
   );
 
-  group('get posts', () {
-    test('Deve retornar os estados na ordem correta ao buscar posts', () async {
-      when(() => getPostsUsecase()).thenAnswer(
-        (_) async => const Right(<Post>[]),
-      );
-      expect(
-        postsBloc.stream,
-        emitsInOrder([
-          isA<PostsLoading>(),
-          isA<PostsSuccess>(),
-        ]),
-      );
-      postsBloc.add(PostsLoad());
-    });
+  void registerGetPosts() {
+    when(() => getPostsUsecase()).thenAnswer(
+      (_) async => const Right(<Post>[]),
+    );
+  }
 
-    test('Deve retornar error ao buscar posts', () async {
+  group('get posts', () {
+    test('Deve retornar error ao buscar posts sem cache', () async {
       when(() => getPostsUsecase()).thenAnswer(
         (_) async => Left(NotFoundException()),
       );
@@ -79,11 +71,39 @@ void main() {
       );
       postsBloc.add(PostsLoad());
     });
+
+    test('Deve retornar os estados na ordem correta ao buscar posts', () async {
+      registerGetPosts();
+      expect(
+        postsBloc.stream,
+        emitsInOrder([
+          isA<PostsLoading>(),
+          isA<PostsSuccess>(),
+        ]),
+      );
+      postsBloc.add(PostsLoad());
+    });
+
+    test('Deve retornar o cache dos posts ao dar error buscando posts',
+        () async {
+      when(() => getPostsUsecase()).thenAnswer(
+        (_) async => Left(NotFoundException()),
+      );
+      expect(
+        postsBloc.stream,
+        emitsInOrder([
+          isA<PostsLoading>(),
+          isA<PostsSuccess>(),
+        ]),
+      );
+      postsBloc.add(PostsLoad());
+    });
   });
 
   group('update post', () {
     test('Deve retornar os estados na ordem correta ao atualizar um post',
         () async {
+      registerGetPosts();
       when(
         () => updatePostUsecase.call(
           currentUser: any(
@@ -98,6 +118,8 @@ void main() {
       expect(
         postsBloc.stream,
         emitsInOrder([
+          isA<PostsUpdateLoading>(),
+          isA<PostsUpdateSuccess>(),
           isA<PostsLoading>(),
           isA<PostsSuccess>(),
         ]),
@@ -124,7 +146,7 @@ void main() {
       expect(
         postsBloc.stream,
         emitsInOrder([
-          isA<PostsLoading>(),
+          isA<PostsUpdateLoading>(),
           isA<PostsError>(),
         ]),
       );
@@ -141,6 +163,7 @@ void main() {
   group('create post', () {
     test('Deve retornar os estados na ordem correta ao criar um post',
         () async {
+      registerGetPosts();
       when(
         () => publishPostUsecase.call(
           currentUser: any(
@@ -154,6 +177,8 @@ void main() {
       expect(
         postsBloc.stream,
         emitsInOrder([
+          isA<PostsCreateLoading>(),
+          isA<PostsCreateSuccess>(),
           isA<PostsLoading>(),
           isA<PostsSuccess>(),
         ]),
@@ -178,7 +203,7 @@ void main() {
       expect(
         postsBloc.stream,
         emitsInOrder([
-          isA<PostsLoading>(),
+          isA<PostsCreateLoading>(),
           isA<PostsError>(),
         ]),
       );
@@ -194,6 +219,7 @@ void main() {
   group('delete post', () {
     test('Deve retornar os estados na ordem correta ao remover um post',
         () async {
+      registerGetPosts();
       when(
         () => deletePostUsecase.call(
           currentUser: any(
@@ -207,8 +233,10 @@ void main() {
       expect(
         postsBloc.stream,
         emitsInOrder([
+          isA<PostsDeleteLoading>(),
+          isA<PostsDeleteSuccess>(),
           isA<PostsLoading>(),
-          isA<PostsSuccess>(),
+          isA<PostsLoadSuccess>(),
         ]),
       );
       postsBloc.add(
@@ -220,25 +248,27 @@ void main() {
     });
 
     test('Deve retornar error ao criar um post', () async {
-      when(() => publishPostUsecase(
-            currentUser: any(
-              named: 'currentUser',
-            ),
-            message: any(named: 'message'),
-          )).thenAnswer(
+      when(
+        () => deletePostUsecase.call(
+          currentUser: any(
+            named: 'currentUser',
+          ),
+          idPost: any(named: 'idPost'),
+        ),
+      ).thenAnswer(
         (_) async => Left(NotFoundException()),
       );
       expect(
         postsBloc.stream,
         emitsInOrder([
-          isA<PostsLoading>(),
+          isA<PostsDeleteLoading>(),
           isA<PostsError>(),
         ]),
       );
       postsBloc.add(
-        PostsCreatePost(
+        PostsRemovePost(
           currentUser: User(name: 'name', urlPicture: 'urlPicture', idUser: 0),
-          message: '',
+          idPost: 0,
         ),
       );
     });
