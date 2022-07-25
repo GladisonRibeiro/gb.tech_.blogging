@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
@@ -17,11 +18,36 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> {
   final bloc = Modular.get<NewsBloc>();
+  late final ScrollController scrollController;
 
   @override
   void initState() {
     super.initState();
+    scrollController = ScrollController();
     bloc.add(NewsLoad());
+
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 600));
+      scrollToBottom();
+    });
+
+    bloc.stream.listen((event) async {
+      if (event is NewsSuccess) {
+        Future.delayed(const Duration(milliseconds: 300), () {
+          scrollToBottom(const Duration(milliseconds: 300));
+        });
+      }
+    });
+  }
+
+  void scrollToBottom([Duration duration = const Duration(milliseconds: 10)]) {
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: duration,
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
@@ -47,6 +73,7 @@ class _NewsPageState extends State<NewsPage> {
 
             final posts = (state as NewsSuccess).posts;
             return ListView.builder(
+              controller: scrollController,
               itemCount: posts.length,
               itemBuilder: (context, index) {
                 final post = posts[index];

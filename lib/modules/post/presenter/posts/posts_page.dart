@@ -37,8 +37,8 @@ class _PostsPageState extends State<PostsPage> {
 
     bloc.stream.listen((event) async {
       if (event is PostsLoadSuccess) {
-        Future.delayed(const Duration(microseconds: 300), () {
-          scrollToBottom(const Duration(microseconds: 300));
+        Future.delayed(const Duration(milliseconds: 300), () {
+          scrollToBottom(const Duration(milliseconds: 300));
         });
       }
     });
