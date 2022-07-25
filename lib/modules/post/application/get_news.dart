@@ -13,10 +13,11 @@ class GetNews {
     final result = await repository.getNews();
 
     return result.fold((l) => Left(l), (r) {
-      r.sort((a, b) {
+      List<Post> posts = List.from(r);
+      posts.sort((a, b) {
         return b.createdDate.compareTo(a.createdDate);
       });
-      return Right(r);
+      return Right(posts);
     });
   }
 }
