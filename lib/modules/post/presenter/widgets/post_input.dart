@@ -45,10 +45,11 @@ class _PostInputState extends State<PostInput> {
             color: surfaceColor,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          child: PaddingMedium(
+          child: PaddingSmall(
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
+                SpacerSmall(),
                 Expanded(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
@@ -80,11 +81,9 @@ class _PostInputState extends State<PostInput> {
                       child: GestureDetector(
                         onTap: onSubmitMessage,
                         child: Container(
-                          height: 46,
-                          width: 46,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
+                          height: buttonMinHeight,
+                          width: buttonMinHeight,
+                          color: Colors.transparent,
                           alignment: Alignment.center,
                           child: const Icon(
                             Icons.send_rounded,

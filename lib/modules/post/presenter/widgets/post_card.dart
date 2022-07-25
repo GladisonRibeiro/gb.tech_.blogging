@@ -119,8 +119,8 @@ class _PostCardState extends State<PostCard> {
           child: GestureDetector(
             child: Container(
               alignment: Alignment.center,
-              width: 32,
-              height: 32,
+              width: 36,
+              height: 36,
               decoration: const BoxDecoration(
                 color: secondaryColor,
                 shape: BoxShape.circle,
@@ -142,8 +142,8 @@ class _PostCardState extends State<PostCard> {
           child: GestureDetector(
             child: Container(
               alignment: Alignment.center,
-              width: 32,
-              height: 32,
+              width: 36,
+              height: 36,
               decoration: const BoxDecoration(
                 color: errorColor,
                 shape: BoxShape.circle,

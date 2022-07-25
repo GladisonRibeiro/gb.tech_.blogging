@@ -125,11 +125,11 @@ class _GbPasswordFieldState extends State<GbPasswordField> {
           ),
         ),
         Positioned(
-          right: 8,
+          right: 0,
           child: GestureDetector(
             child: Container(
-              width: 32,
-              height: 32,
+              width: 48,
+              height: 48,
               color: Colors.transparent,
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 400),
