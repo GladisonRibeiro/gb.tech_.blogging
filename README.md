@@ -64,7 +64,7 @@ Foi criado um package [gbtech_blogging_ds](https://github.com/GladisonRibeiro/gb
 
 <br/>
 
-Estou disponibilizando uma APK para facilitar os testes, [clique aqui para baixar](https://drive.google.com/file/d/1KAyH3XshOdmGKgoULVzPEM9z4CZCoI8e/view?usp=sharing)
+Estou disponibilizando uma APK para facilitar os testes, [clique aqui para baixar](https://drive.google.com/file/d/14XKGaOCRmKpGTKdOc7uuvkbEz0MhyIjt/view?usp=sharing)
 
 Obs: É necessário que o smartphone esteja permitindo a instalação de apps de fontes desconhecidas.
 
