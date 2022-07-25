@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../../shared/widgets/loading_widget.dart';
 import '../../shared/widgets/widgets.dart';
 import 'login_bloc.dart';
 import 'login_event.dart';
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                 final state = bloc.state;
 
                                 if (state is LoginLoading) {
-                                  return const CircularProgressIndicator();
+                                  return const LoadingWidget();
                                 }
 
                                 return GbButton(

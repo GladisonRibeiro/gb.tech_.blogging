@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../../shared/widgets/loading_widget.dart';
 import '../posts/posts_bloc.dart';
 import '../posts/posts_event.dart';
 import '../posts/posts_state.dart';
@@ -64,13 +65,7 @@ class _PostInputState extends State<PostInput> {
                     final state = bloc.state;
 
                     if (state is PostsCreateLoading) {
-                      return PaddingSmall(
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: buttonBackgroundColor,
-                          ),
-                        ),
-                      );
+                      return const LoadingWidget();
                     }
 
                     return GestureDetector(

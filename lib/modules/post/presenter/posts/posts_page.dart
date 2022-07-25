@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../../shared/widgets/loading_widget.dart';
 import '../../domain/entities/post.dart';
 import '../widgets/post_card.dart';
 import '../widgets/post_input.dart';
@@ -82,9 +83,7 @@ class _PostsPageState extends State<PostsPage> {
                       child: Container(
                         height: 300,
                         alignment: Alignment.center,
-                        child: const CircularProgressIndicator(
-                          color: primaryColor,
-                        ),
+                        child: const LoadingWidget(),
                       ),
                     );
                   }

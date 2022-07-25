@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../../shared/widgets/loading_widget.dart';
 import '../../domain/exception/exception.dart';
 import '../../shared/widgets/widgets.dart';
 import 'sign_up_bloc.dart';
@@ -138,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 final state = bloc.state;
 
                                 if (state is SignUpLoading) {
-                                  return const CircularProgressIndicator();
+                                  return const LoadingWidget();
                                 }
 
                                 return GbButton(
