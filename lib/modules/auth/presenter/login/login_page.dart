@@ -66,7 +66,10 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SpacerExtraLarge(),
-                    GbHeadline('gb.tech_ blogging'),
+                    GbHeadline(
+                      'gb.tech_ blogging',
+                      semanticsLabel: 'Nome do apicativo',
+                    ),
                     SpacerExtraLarge(),
                     ConstrainedBox(
                       constraints: const BoxConstraints(
@@ -77,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             GbInput(
+                              semanticsLabel: 'Input para informar o e-mail',
                               controller: emailController,
                               label: 'E-mail',
                               validator: (email) {
@@ -90,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             SpacerMedium(),
                             GbPasswordInput(
+                              semanticsLabel: 'Input para informar a senha',
                               controller: passwordController,
                               label: 'Senha',
                               validator: (senha) {
@@ -111,6 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                                 }
 
                                 return GbButton(
+                                  semanticsLabel:
+                                      'Botão para confirmar credênciais e entrar',
                                   label: 'Entrar',
                                   onTap: () {
                                     _formKey.currentState?.save();
@@ -126,6 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             SpacerLarge(),
                             GbTextButton(
+                              semanticsLabel:
+                                  'Botão para abrir página de cadastro',
                               label: 'Cadastre-se',
                               onTap: () {
                                 Modular.to.pushNamed('./sign_up');

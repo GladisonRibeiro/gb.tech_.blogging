@@ -55,6 +55,8 @@ class _PostInputState extends State<PostInput> {
                       maxHeight: 300.0,
                     ),
                     child: GbInput(
+                      semanticsLabel:
+                          'Input para digitar uma mensagem a ser compartilhada',
                       label: 'Compartilhe uma mensagem:',
                       controller: messageController,
                       maxLines: null,
@@ -73,19 +75,22 @@ class _PostInputState extends State<PostInput> {
                       return const LoadingWidget();
                     }
 
-                    return GestureDetector(
-                      onTap: onSubmitMessage,
-                      child: Container(
-                        height: 46,
-                        width: 46,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: Alignment.center,
-                        child: const Icon(
-                          Icons.send_rounded,
-                          color: buttonBackgroundColor,
-                          size: 32,
+                    return Semantics(
+                      label: 'Botão para compartilhar a mensagem digitada',
+                      child: GestureDetector(
+                        onTap: onSubmitMessage,
+                        child: Container(
+                          height: 46,
+                          width: 46,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: const Icon(
+                            Icons.send_rounded,
+                            color: buttonBackgroundColor,
+                            size: 32,
+                          ),
                         ),
                       ),
                     );

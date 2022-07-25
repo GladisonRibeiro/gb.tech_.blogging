@@ -114,44 +114,50 @@ class _PostCardState extends State<PostCard> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        GestureDetector(
-          child: Container(
-            alignment: Alignment.center,
-            width: 32,
-            height: 32,
-            decoration: const BoxDecoration(
-              color: buttonBackgroundColor,
-              shape: BoxShape.circle,
+        Semantics(
+          label: 'Botão para editar essa postagem',
+          child: GestureDetector(
+            child: Container(
+              alignment: Alignment.center,
+              width: 32,
+              height: 32,
+              decoration: const BoxDecoration(
+                color: buttonBackgroundColor,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.edit,
+                size: 16,
+                color: backgroundColor,
+              ),
             ),
-            child: const Icon(
-              Icons.edit,
-              size: 16,
-              color: backgroundColor,
-            ),
+            onTap: () {
+              showUpdateMessageDialog(context);
+            },
           ),
-          onTap: () {
-            showUpdateMessageDialog(context);
-          },
         ),
         SpacerMedium(),
-        GestureDetector(
-          child: Container(
-            alignment: Alignment.center,
-            width: 32,
-            height: 32,
-            decoration: const BoxDecoration(
-              color: accentColor,
-              shape: BoxShape.circle,
+        Semantics(
+          label: 'Botão para apagar essa postagem',
+          child: GestureDetector(
+            child: Container(
+              alignment: Alignment.center,
+              width: 32,
+              height: 32,
+              decoration: const BoxDecoration(
+                color: accentColor,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.close,
+                size: 16,
+                color: backgroundColor,
+              ),
             ),
-            child: const Icon(
-              Icons.close,
-              size: 16,
-              color: backgroundColor,
-            ),
+            onTap: () {
+              showRemoveMessageDialog(context);
+            },
           ),
-          onTap: () {
-            showRemoveMessageDialog(context);
-          },
         ),
       ],
     );

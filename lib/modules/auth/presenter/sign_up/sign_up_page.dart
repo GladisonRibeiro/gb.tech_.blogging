@@ -63,6 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
         title: GbHeadline(
           'Cadastre-se',
           style: const TextStyle(color: Colors.white),
+          semanticsLabel: 'Titulo da página',
         ),
       ),
       body: Stack(
@@ -97,6 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Column(
                           children: [
                             GbInput(
+                              semanticsLabel: 'Input para informar o nome',
                               controller: nameController,
                               label: 'Nome',
                               validator: (email) {
@@ -109,6 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             SpacerMedium(),
                             GbInput(
+                              semanticsLabel: 'Input para informar o E-mail',
                               controller: emailController,
                               label: 'E-mail',
                               validator: (email) {
@@ -122,6 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             SpacerMedium(),
                             GbPasswordInput(
+                              semanticsLabel: 'Input para informar a senha',
                               controller: passwordController,
                               label: 'Senha',
                               validator: (senha) {
@@ -143,6 +147,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 }
 
                                 return GbButton(
+                                  semanticsLabel:
+                                      'Botão para continuar o cadastro',
                                   label: 'Continuar',
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {

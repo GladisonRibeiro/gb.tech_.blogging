@@ -36,11 +36,13 @@ class _HomePageState extends State<HomePage> {
               onTap: onChangePage,
               items: const [
                 BottomNavigationBarItem(
+                  tooltip: 'Botão para exibir postagens',
                   activeIcon: Icon(Icons.chat),
                   icon: Icon(Icons.chat_outlined),
                   label: 'Postagens',
                 ),
                 BottomNavigationBarItem(
+                  tooltip: 'Botão para exibir novidades da Boticário',
                   activeIcon: Icon(Icons.newspaper),
                   icon: Icon(Icons.newspaper_outlined),
                   label: 'Novidades',
