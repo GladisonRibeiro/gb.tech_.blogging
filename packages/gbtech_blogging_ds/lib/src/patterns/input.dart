@@ -14,6 +14,7 @@ class GbInput extends StatelessWidget {
   final TextInputType? keyboardType;
   final int? maxLength;
   final TextInputAction? textInputAction;
+  final String? semanticsLabel;
 
   const GbInput({
     Key? key,
@@ -27,27 +28,31 @@ class GbInput extends StatelessWidget {
     this.keyboardType,
     this.maxLength,
     this.textInputAction,
+    this.semanticsLabel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GbLabel(label),
-        SpacerSmall(),
-        GbTextField(
-          keyField: keyInput,
-          validator: validator,
-          onSaved: onSaved,
-          controller: controller,
-          maxLines: maxLines,
-          maxLength: maxLength,
-          keyboardType: keyboardType,
-          textInputAction: textInputAction,
-        ),
-      ],
+    return Semantics(
+      label: semanticsLabel,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GbLabel(label),
+          SpacerSmall(),
+          GbTextField(
+            keyField: keyInput,
+            validator: validator,
+            onSaved: onSaved,
+            controller: controller,
+            maxLines: maxLines,
+            maxLength: maxLength,
+            keyboardType: keyboardType,
+            textInputAction: textInputAction,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -60,6 +65,7 @@ class GbPasswordInput extends StatelessWidget {
   final void Function(String?)? onSaved;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
+  final String? semanticsLabel;
 
   const GbPasswordInput({
     Key? key,
@@ -70,23 +76,27 @@ class GbPasswordInput extends StatelessWidget {
     this.onSaved,
     this.controller,
     this.textInputAction,
+    this.semanticsLabel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GbLabel(label),
-        SpacerSmall(),
-        GbPasswordField(
-          keyField: keyInput,
-          validator: validator,
-          onSaved: onSaved,
-          controller: controller,
-          textInputAction: textInputAction,
-        ),
-      ],
+    return Semantics(
+      label: semanticsLabel,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GbLabel(label),
+          SpacerSmall(),
+          GbPasswordField(
+            keyField: keyInput,
+            validator: validator,
+            onSaved: onSaved,
+            controller: controller,
+            textInputAction: textInputAction,
+          ),
+        ],
+      ),
     );
   }
 }
