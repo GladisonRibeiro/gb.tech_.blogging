@@ -83,21 +83,6 @@ void main() {
       );
       postsBloc.add(PostsLoad());
     });
-
-    test('Deve retornar o cache dos posts ao dar error buscando posts',
-        () async {
-      when(() => getPostsUsecase()).thenAnswer(
-        (_) async => Left(NotFoundException()),
-      );
-      expect(
-        postsBloc.stream,
-        emitsInOrder([
-          isA<PostsLoading>(),
-          isA<PostsSuccess>(),
-        ]),
-      );
-      postsBloc.add(PostsLoad());
-    });
   });
 
   group('update post', () {
