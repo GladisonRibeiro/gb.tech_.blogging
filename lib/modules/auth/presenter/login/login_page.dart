@@ -84,9 +84,11 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                                 return null;
                               },
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
                             ),
                             SpacerMedium(),
-                            GbInput(
+                            GbPasswordInput(
                               controller: passwordController,
                               label: 'Senha',
                               validator: (senha) {
@@ -95,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                                 return null;
                               },
+                              textInputAction: TextInputAction.done,
                             ),
                             SpacerExtraLarge(),
                             StreamBuilder(

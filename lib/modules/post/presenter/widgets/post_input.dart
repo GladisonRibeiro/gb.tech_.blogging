@@ -52,6 +52,9 @@ class _PostInputState extends State<PostInput> {
                   child: GbInput(
                     label: 'Compartilhe uma mensagem:',
                     controller: messageController,
+                    maxLines: 3,
+                    keyboardType: TextInputType.multiline,
+                    maxLength: 280,
                   ),
                 ),
                 SpacerSmall(),

@@ -104,6 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 }
                                 return null;
                               },
+                              textInputAction: TextInputAction.next,
                             ),
                             SpacerMedium(),
                             GbInput(
@@ -115,9 +116,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 }
                                 return null;
                               },
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
                             ),
                             SpacerMedium(),
-                            GbInput(
+                            GbPasswordInput(
                               controller: passwordController,
                               label: 'Senha',
                               validator: (senha) {
@@ -126,6 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 }
                                 return null;
                               },
+                              textInputAction: TextInputAction.done,
                             ),
                             SpacerExtraLarge(),
                             StreamBuilder(
