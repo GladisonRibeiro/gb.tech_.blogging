@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
       }
       if (event is LoginError) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: accentColor,
+          backgroundColor: errorColor,
           content: Text("Verifique suas credenciais!"),
         ));
       }

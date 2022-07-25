@@ -9,7 +9,7 @@ class GbCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: cardColor,
+        color: surfaceColor,
       ),
       child: PaddingMedium(child: child),
     );

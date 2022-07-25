@@ -17,7 +17,7 @@ Text GbHeadline(
         fontFamily: fontFamilySansSerif,
         fontSize: 32,
         fontWeight: FontWeight.w700,
-        color: headlineColor,
+        color: displayColor,
       ).merge(style),
       semanticsLabel: semanticsLabel,
     );
@@ -32,7 +32,7 @@ Text GbSubTitle(
         fontFamily: fontFamilySansSerif,
         fontSize: 24,
         fontWeight: FontWeight.w400,
-        color: headlineColor,
+        color: displayColor,
       ).merge(style),
       semanticsLabel: semanticsLabel,
     );
@@ -78,7 +78,7 @@ Text GbButtonLabel(
         fontFamily: fontFamilySansSerif,
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: buttonLabelColor,
+        color: onSecondaryColor,
       ).merge(style),
       semanticsLabel: semanticsLabel,
     );

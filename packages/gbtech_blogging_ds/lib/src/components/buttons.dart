@@ -25,8 +25,8 @@ class GbButton extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: onTap != null
-                ? buttonBackgroundColor
-                : buttonBackgroundColor.withOpacity(0.3),
+                ? secondaryColor
+                : secondaryColor.withOpacity(0.3),
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           width: double.infinity,
@@ -64,7 +64,7 @@ class GbTextButton extends StatelessWidget {
           child: GbButtonLabel(
             label,
             style: const TextStyle(
-              color: buttonBackgroundColor,
+              color: secondaryColor,
               fontWeight: FontWeight.w700,
             ),
           ),

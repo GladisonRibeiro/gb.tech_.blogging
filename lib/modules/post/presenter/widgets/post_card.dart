@@ -48,7 +48,7 @@ class _PostCardState extends State<PostCard> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: accentColor,
+        backgroundColor: errorColor,
         content: Text("Digite uma mensagem!"),
       ));
     }
@@ -122,7 +122,7 @@ class _PostCardState extends State<PostCard> {
               width: 32,
               height: 32,
               decoration: const BoxDecoration(
-                color: buttonBackgroundColor,
+                color: secondaryColor,
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -145,7 +145,7 @@ class _PostCardState extends State<PostCard> {
               width: 32,
               height: 32,
               decoration: const BoxDecoration(
-                color: accentColor,
+                color: errorColor,
                 shape: BoxShape.circle,
               ),
               child: const Icon(

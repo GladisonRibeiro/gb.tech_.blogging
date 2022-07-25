@@ -52,7 +52,7 @@ class GbTextField extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-          borderSide: BorderSide(color: accentColor, width: 2),
+          borderSide: BorderSide(color: errorColor, width: 2),
         ),
       ),
     );
@@ -120,7 +120,7 @@ class _GbPasswordFieldState extends State<GbPasswordField> {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-              borderSide: BorderSide(color: accentColor, width: 2),
+              borderSide: BorderSide(color: errorColor, width: 2),
             ),
           ),
         ),

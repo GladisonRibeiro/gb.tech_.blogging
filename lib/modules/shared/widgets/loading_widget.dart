@@ -9,7 +9,7 @@ class LoadingWidget extends StatelessWidget {
     return PaddingSmall(
       child: const Center(
         child: CircularProgressIndicator(
-          color: buttonBackgroundColor,
+          color: secondaryColor,
         ),
       ),
     );

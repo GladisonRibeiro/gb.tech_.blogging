@@ -22,7 +22,7 @@ class _PostInputState extends State<PostInput> {
   onSubmitMessage() {
     if (messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: accentColor,
+        backgroundColor: errorColor,
         content: Text("Digite uma mensagem!"),
       ));
       return;
@@ -42,7 +42,7 @@ class _PostInputState extends State<PostInput> {
         key: const Key('form_post_input'),
         child: Container(
           decoration: BoxDecoration(
-            color: cardColor,
+            color: surfaceColor,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: PaddingMedium(
@@ -88,7 +88,7 @@ class _PostInputState extends State<PostInput> {
                           alignment: Alignment.center,
                           child: const Icon(
                             Icons.send_rounded,
-                            color: buttonBackgroundColor,
+                            color: secondaryColor,
                             size: 32,
                           ),
                         ),
