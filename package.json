@@ -1,0 +1,14 @@
+{
+  "name": "gbtech_blogging",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/GladisonRibeiro/gb.tech_.blogging.git",
+  "author": "Gladison <gladison.sonik@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lcov2badge": "^0.1.2"
+  },
+  "scripts": {
+    "create-badge": "node ./covBadgeGen.js"
+  }
+}

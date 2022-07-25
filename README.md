@@ -1,4 +1,4 @@
-![Status](https://img.shields.io/badge/status-waiting%20for%20feedback-yellowgreen?style=flat-square)
+![Status](https://img.shields.io/badge/status-waiting%20for%20feedback-yellowgreen?style=flat-square) ![Coverage](./coverage_badge.svg?sanitize=true)
 # gb.tech_.blogging
 
 ---
