@@ -41,15 +41,18 @@ class GbInput extends StatelessWidget {
         children: [
           GbLabel(label),
           SpacerSmall(),
-          GbTextField(
-            keyField: keyInput,
-            validator: validator,
-            onSaved: onSaved,
-            controller: controller,
-            maxLines: maxLines,
-            maxLength: maxLength,
-            keyboardType: keyboardType,
-            textInputAction: textInputAction,
+          Container(
+            color: surfaceColor,
+            child: GbTextField(
+              keyField: keyInput,
+              validator: validator,
+              onSaved: onSaved,
+              controller: controller,
+              maxLines: maxLines,
+              maxLength: maxLength,
+              keyboardType: keyboardType,
+              textInputAction: textInputAction,
+            ),
           ),
         ],
       ),
@@ -84,16 +87,20 @@ class GbPasswordInput extends StatelessWidget {
     return Semantics(
       label: semanticsLabel,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GbLabel(label),
           SpacerSmall(),
-          GbPasswordField(
-            keyField: keyInput,
-            validator: validator,
-            onSaved: onSaved,
-            controller: controller,
-            textInputAction: textInputAction,
+          Container(
+            color: surfaceColor,
+            child: GbPasswordField(
+              keyField: keyInput,
+              validator: validator,
+              onSaved: onSaved,
+              controller: controller,
+              textInputAction: textInputAction,
+            ),
           ),
         ],
       ),
