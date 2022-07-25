@@ -45,7 +45,7 @@ Text GbText(
       text,
       style: const TextStyle(
         fontFamily: fontFamilyMonospace,
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: FontWeight.w400,
         color: bodyColor,
       ).merge(style),
@@ -60,7 +60,7 @@ Text GbLabel(
       text,
       style: const TextStyle(
         fontFamily: fontFamilyMonospace,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: FontWeight.w500,
         color: bodyColor,
       ).merge(style),
