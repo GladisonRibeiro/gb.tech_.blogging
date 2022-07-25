@@ -64,7 +64,7 @@ Foi criado um package [gbtech_blogging_ds](https://github.com/GladisonRibeiro/gb
 
 <br/>
 
-Estou disponibilizando uma APK para facilitar os testes, [clique aqui para baixar](https://drive.google.com/file/d/1leLq0XBO-JflK1m1qWh3O6q-nbP1BsNL/view?usp=sharing)
+Estou disponibilizando uma APK para facilitar os testes, [clique aqui para baixar](https://drive.google.com/file/d/1KAyH3XshOdmGKgoULVzPEM9z4CZCoI8e/view?usp=sharing)
 
 Obs: É necessário que o smartphone esteja permitindo a instalação de apps de fontes desconhecidas.
 
@@ -77,6 +77,7 @@ Obs: Para rodar __web__ localmente é necessário remover a segurança, veja com
 ## Informações gerais sobre o app
 
 ### Versões
+
 Flutter: sem restrições no projeto, instalada: 3.0.5
 Dart: ">=2.17.6 < 3.0.0"
 
