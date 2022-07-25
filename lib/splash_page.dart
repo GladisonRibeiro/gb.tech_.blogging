@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   openAuthModule() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     Modular.to.navigate('/auth/');
   }
 
