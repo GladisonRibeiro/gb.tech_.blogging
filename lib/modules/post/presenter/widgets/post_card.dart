@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:gbtech_blogging/modules/auth/domain/services/auth_store.dart';
-import 'package:gbtech_blogging/modules/post/presenter/posts/posts_bloc.dart';
 import 'package:gbtech_blogging_ds/gbtech_blogging_ds.dart';
 
+import '../../../auth/domain/services/auth_store.dart';
 import '../../../shared/utils/formart_date.dart';
 import '../../domain/entities/post.dart';
+import '../posts/posts_bloc.dart';
 import '../posts/posts_event.dart';
 
 class PostCard extends StatefulWidget {
@@ -46,6 +46,11 @@ class _PostCardState extends State<PostCard> {
           currentUser: null,
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: accentColor,
+        content: Text("Digite uma mensagem!"),
+      ));
     }
   }
 
