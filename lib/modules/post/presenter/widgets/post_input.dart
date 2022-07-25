@@ -50,12 +50,17 @@ class _PostInputState extends State<PostInput> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: GbInput(
-                    label: 'Compartilhe uma mensagem:',
-                    controller: messageController,
-                    maxLines: 3,
-                    keyboardType: TextInputType.multiline,
-                    maxLength: 280,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxHeight: 300.0,
+                    ),
+                    child: GbInput(
+                      label: 'Compartilhe uma mensagem:',
+                      controller: messageController,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      maxLength: 280,
+                    ),
                   ),
                 ),
                 SpacerSmall(),
