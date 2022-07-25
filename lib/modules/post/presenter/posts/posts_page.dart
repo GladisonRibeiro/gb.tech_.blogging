@@ -92,7 +92,7 @@ class _PostsPageState extends State<PostsPage> {
                     return SliverToBoxAdapter(
                       child: Center(
                         child: GbLabel(
-                          'Não foi possível carregar as novidades...',
+                          'Não foi possível carregar as postagens...',
                         ),
                       ),
                     );
