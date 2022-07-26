@@ -55,6 +55,7 @@ class _PostCardState extends State<PostCard> {
   }
 
   showUpdateMessageDialog(BuildContext context) {
+    messageController.text = widget.post.message;
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -64,8 +65,13 @@ class _PostCardState extends State<PostCard> {
             child: Column(
               children: [
                 GbInput(
+                  semanticsLabel:
+                      'Input para digitar uma mensagem a ser editada',
                   label: 'Nova mensagem',
                   controller: messageController,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  maxLength: 280,
                 ),
               ],
             ),
