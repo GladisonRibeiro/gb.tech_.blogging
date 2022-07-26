@@ -54,6 +54,8 @@ class GbTextField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
           borderSide: BorderSide(color: errorColor, width: 2),
         ),
+        fillColor: surfaceColor,
+        filled: true,
       ),
     );
   }
@@ -122,14 +124,17 @@ class _GbPasswordFieldState extends State<GbPasswordField> {
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
               borderSide: BorderSide(color: errorColor, width: 2),
             ),
+            fillColor: surfaceColor,
+            filled: true,
           ),
         ),
         Positioned(
+          top: 0,
           right: 0,
           child: GestureDetector(
             child: Container(
-              width: 48,
-              height: 48,
+              width: 55,
+              height: 55,
               color: Colors.transparent,
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 400),
